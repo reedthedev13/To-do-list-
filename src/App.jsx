@@ -34,7 +34,22 @@ function App() {
             placeholder="Enter task..."
             className="flex-1 border rounded p-2"
           />
+          <button
+            onClick={addTask}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Add
+          </button>
         </div>
+        <ul>
+          {tasks.map((task) => (
+            <li key={task.id} className="border-b py-2">
+              <span className={task.completed ? "line-through" : ""}>
+                {task.title}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

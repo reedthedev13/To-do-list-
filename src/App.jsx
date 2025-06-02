@@ -12,18 +12,22 @@ function App() {
   }, []);
 
   const fetchTasks = async () => {
-    const res = await fetch("http://localhost:5001/api/tasks");
+    const res = await fetch(
+      "https://to-do-list-backend-f8xd.onrender.com/tasks"
+    );
     setTasks(await res.json());
   };
 
   const fetchCategories = async () => {
-    const res = await fetch("http://localhost:5001/api/categories");
+    const res = await fetch(
+      "https://to-do-list-backend-f8xd.onrender.com/categories"
+    );
     setCategories(await res.json());
   };
 
   const addTask = async () => {
     if (!title.trim()) return;
-    await fetch("http://localhost:5001/api/tasks", {
+    await fetch("https://to-do-list-backend-f8xd.onrender.com/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, completed: false }),
@@ -33,13 +37,15 @@ function App() {
   };
 
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5001/api/tasks/${id}`, { method: "DELETE" });
+    await fetch(`https://to-do-list-backend-f8xd.onrender.com/tasks/${id}`, {
+      method: "DELETE",
+    });
     fetchTasks();
   };
 
   const addCategory = async () => {
     if (!newCategoryName.trim()) return;
-    await fetch("http://localhost:5001/api/categories", {
+    await fetch("https://to-do-list-backend-f8xd.onrender.com/categories", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: newCategoryName, color: "#4f46e5" }),
@@ -49,7 +55,7 @@ function App() {
   };
 
   const deleteCategory = async (id) => {
-    await fetch(`http://localhost:5001/api/categories/${id}`, {
+    await fetch(`https://to-do-list-backend-f8xd.onrender.com/${id}`, {
       method: "DELETE",
     });
     fetchCategories();

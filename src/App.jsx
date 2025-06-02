@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const API_BASE = "https://to-do-list-backend-f8xd.onrender.com/api";
+
 function App() {
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -12,22 +14,18 @@ function App() {
   }, []);
 
   const fetchTasks = async () => {
-    const res = await fetch(
-      "https://to-do-list-backend-f8xd.onrender.com/api/tasks"
-    );
+    const res = await fetch(`${API_BASE}/tasks`);
     setTasks(await res.json());
   };
 
   const fetchCategories = async () => {
-    const res = await fetch(
-      "https://to-do-list-backend-f8xd.onrender.com/api/categories"
-    );
+    const res = await fetch(`${API_BASE}/categories`);
     setCategories(await res.json());
   };
 
   const addTask = async () => {
     if (!title.trim()) return;
-    await fetch("https://to-do-list-backend-f8xd.onrender.com/api/tasks", {
+    await fetch(`${API_BASE}/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, completed: false }),
@@ -37,18 +35,15 @@ function App() {
   };
 
   const deleteTask = async (id) => {
-    await fetch(
-      `https://to-do-list-backend-f8xd.onrender.com/api/tasks/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    await fetch(`${API_BASE}/tasks/${id}`, {
+      method: "DELETE",
+    });
     fetchTasks();
   };
 
   const addCategory = async () => {
     if (!newCategoryName.trim()) return;
-    await fetch("https://to-do-list-backend-f8xd.onrender.com/api/categories", {
+    await fetch(`${API_BASE}/categories`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: newCategoryName, color: "#4f46e5" }),
@@ -58,7 +53,7 @@ function App() {
   };
 
   const deleteCategory = async (id) => {
-    await fetch(`https://to-do-list-backend-f8xd.onrender.com/api/${id}`, {
+    await fetch(`${API_BASE}/categories/${id}`, {
       method: "DELETE",
     });
     fetchCategories();
